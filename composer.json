@@ -1,0 +1,26 @@
+{
+  "name": "invigor/um",
+  "description": "User management package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Li",
+      "email": "ivan.li@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "illuminate/console": "~5.0",
+    "illuminate/support": "~5.0",
+    "illuminate/cache": "~5.0"
+  },
+  "autoload": {
+    "classmap": [
+      "src/commands"
+    ],
+    "psr-4": {
+      "IvanCLI\\UM\\": "src/UM/"
+    }
+  },
+  "minimum-stability": "dev"
+}
