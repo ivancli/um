@@ -1,11 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Ivan
- * Date: 19/02/2017
- * Time: 3:59 PM
- */
-
+<?php echo '<?php' ?>
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
