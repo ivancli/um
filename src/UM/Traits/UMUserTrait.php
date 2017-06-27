@@ -148,6 +148,12 @@ trait UMUserTrait
                 foreach ($role->cachedPermissions() as $perm) {
                     if (str_is($permission, $perm->name)) {
                         return true;
+                    } elseif (!is_null($perm->childPerms)) {
+                        foreach ($perm->childPerms as $childPerm) {
+                            if (str_is($permission, $childPerm->name)) {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
