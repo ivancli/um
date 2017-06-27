@@ -22,12 +22,12 @@ trait UMPermissionTrait
         return $this->belongsToMany(Config::get('um.role'), Config::get('um.permission_role_table'));
     }
 
-    public function childPermissions()
+    public function childPerms()
     {
         return $this->hasMany(Config::get('um.permission'), 'parent_id', 'id');
     }
 
-    public function parentPermission()
+    public function parentPerm()
     {
         return $this->belongsTo(Config::get('um.permission'), 'parent_id', 'id');
     }
