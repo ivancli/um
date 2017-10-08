@@ -19,6 +19,7 @@ class UMServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $defer = false;
+
     /**
      * Bootstrap the application events.
      *
@@ -28,13 +29,14 @@ class UMServiceProvider extends ServiceProvider
     {
         // Publish config files
         $this->publishes([
-            __DIR__.'/../config/config.php' => app()->basePath() . '/config/um.php',
-        ]);
+            __DIR__ . '/../config/config.php' => app()->basePath() . '/config/um.php',
+        ], 'um');
         // Register commands
         $this->commands('command.um.migration');
         // Register blade directives
         $this->bladeDirectives();
     }
+
     /**
      * Register the service provider.
      *
@@ -46,6 +48,7 @@ class UMServiceProvider extends ServiceProvider
         $this->registerCommands();
         $this->mergeConfig();
     }
+
     /**
      * Register the blade directives
      *
@@ -55,27 +58,28 @@ class UMServiceProvider extends ServiceProvider
     {
         if (!class_exists('\Blade')) return;
         // Call to UM::hasRole
-        \Blade::directive('role', function($expression) {
+        \Blade::directive('role', function ($expression) {
             return "<?php if (\\UM::hasRole({$expression})) : ?>";
         });
-        \Blade::directive('endrole', function($expression) {
+        \Blade::directive('endrole', function ($expression) {
             return "<?php endif; // UM::hasRole ?>";
         });
         // Call to UM::can
-        \Blade::directive('permission', function($expression) {
+        \Blade::directive('permission', function ($expression) {
             return "<?php if (\\UM::can({$expression})) : ?>";
         });
-        \Blade::directive('endpermission', function($expression) {
+        \Blade::directive('endpermission', function ($expression) {
             return "<?php endif; // UM::can ?>";
         });
         // Call to UM::ability
-        \Blade::directive('ability', function($expression) {
+        \Blade::directive('ability', function ($expression) {
             return "<?php if (\\UM::ability({$expression})) : ?>";
         });
-        \Blade::directive('endability', function($expression) {
+        \Blade::directive('endability', function ($expression) {
             return "<?php endif; // UM::ability ?>";
         });
     }
+
     /**
      * Register the application bindings.
      *
@@ -88,6 +92,7 @@ class UMServiceProvider extends ServiceProvider
         });
         $this->app->alias('um', 'IvanCLI\UM\UM');
     }
+
     /**
      * Register the artisan commands.
      *
@@ -99,6 +104,7 @@ class UMServiceProvider extends ServiceProvider
             return new MigrationCommand();
         });
     }
+
     /**
      * Merges user's and um's configs.
      *
@@ -107,9 +113,10 @@ class UMServiceProvider extends ServiceProvider
     private function mergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'um'
+            __DIR__ . '/../config/config.php', 'um'
         );
     }
+
     /**
      * Get the services provided.
      *
